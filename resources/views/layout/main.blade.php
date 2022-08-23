@@ -22,6 +22,7 @@
 
 <body id="page-top">
 
+
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -31,7 +32,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-solid fa-blog"></i>
+                    <i class="fas fa-solid fa-blog"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">MY BLOG</div>
             </a>
@@ -57,13 +58,13 @@
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-thin fa-user"></i>
+                    <i class="fas fa-thin fa-user"></i>
                     <span>Sub-Admins</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ url('add-sub-admins') }}">Add Sub-Admins</a>
-                        <a class="collapse-item" href="{{ url('edit-sub-admins') }}">Manage Sub-Admins</a>
+                        <a class="collapse-item" href="{{ url('manage-sub-admins') }}">Manage Sub-Admins</a>
                     </div>
                 </div>
             </li>
@@ -114,8 +115,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                    aria-expanded="true" aria-controls="collapseSix">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
                     <i class="fas fa-solid fa-list"></i>
                     <span>Pages</span>
                 </a>
@@ -130,8 +130,7 @@
 
             <!-- Nav Item - Comments Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven"
-                    aria-expanded="true" aria-controls="collapseSeven">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                     <i class="fas fa-solid fa-comments"></i>
                     <span>Comments</span>
                 </a>
@@ -145,24 +144,16 @@
 
             <!-- Nav Item - Subscribers Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
-                    aria-expanded="true" aria-controls="collapseEight">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
                     <i class="fas fa-thin fa-users"></i>
                     <span>Subscribers</span>
                 </a>
-                <div id="collapseEight" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('add-sub-category') }}">Add Sub-Category</a>
-                        <a class="collapse-item" href="{{ url('manage-sub-category') }}">Manage Sub-Category</a>
-                    </div>
-                </div>
             </li>
 
 
             <!-- Nav Item - Settings Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
-                    aria-expanded="true" aria-controls="collapseNine">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Websites Settings</span>
                 </a>
@@ -381,6 +372,9 @@
                     <!-- Page Heading -->
                     @yield('content')
 
+                    @yield('dashboard')
+
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -430,6 +424,8 @@
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/assets/vendor/jquery/jquery.min.js' ) }}"></script>
     <script src="{{ asset('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' ) }}"></script>
+    <!-- Bootstrap cdn added by me -->
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js') }}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('/assets/vendor/jquery-easing/jquery.easing.min.js' ) }}"></script>
