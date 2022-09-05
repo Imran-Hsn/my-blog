@@ -30,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-solid fa-blog"></i>
                 </div>
@@ -42,7 +42,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ url('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -55,105 +55,68 @@
                 Interface
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Pages -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link" href="{{ url('author') }}">
                     <i class="fas fa-thin fa-user"></i>
-                    <span>Sub-Admins</span>
+                    <span>Author</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('add-sub-admins') }}">Add Sub-Admins</a>
-                        <a class="collapse-item" href="{{ url('manage-sub-admins') }}">Manage Sub-Admins</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Category Collapse Menu -->
+            <!-- Nav Item - Category -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                <a class="nav-link" href="{{ url('category') }}">
                     <i class="fas fa-solid fa-list"></i>
                     <span>Category</span>
                 </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{url('add-category')}}">Add Category</a>
-                        <a class="collapse-item" href="{{url('manage-category')}}">Manage Category</a>
-                    </div>
-                </div>
             </li>
 
 
-            <!-- Nav Item - Subcategory Collapse Menu -->
+            <!-- Nav Item - Subcategory -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                <a class="nav-link" href="{{url('tags')}}">
                     <i class="fas fa-solid fa-list"></i>
-                    <span>Sub Category</span>
+                    <span>Tags</span>
                 </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('add-sub-category') }}">Add Sub-Category</a>
-                        <a class="collapse-item" href="{{url('manage-sub-category')}}">Manage Sub-Category</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Posts Collapse Menu -->
+            <!-- Nav Item - Posts -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                <a class="nav-link" href="{{ url('posts') }}">
                     <i class="fas fa-solid fa-list"></i>
                     <span>Posts</span>
                 </a>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('add-posts') }}">Create Posts</a>
-                        <a class="collapse-item" href="{{ url('manage-posts') }}">Manage Posts</a>
-                        <a class="collapse-item" href="{{ url('trash-posts') }}">Trash Posts</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Pages -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                    <i class="fas fa-solid fa-list"></i>
+                <a class="nav-link href="{{ url('pages') }}">
+                <i class="fas fa-solid fa-list"></i>
                     <span>Pages</span>
                 </a>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('about-us') }}">About Us</a>
-                        <a class="collapse-item" href="{{ url('contact-us')}}">Contact Us</a>
-                    </div>
-                </div>
             </li>
 
 
-            <!-- Nav Item - Comments Collapse Menu -->
+            <!-- Nav Item - Comments  -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                <a class="nav-link" href="{{ url('comments') }}">
                     <i class="fas fa-solid fa-comments"></i>
                     <span>Comments</span>
                 </a>
-                <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('comments-approval') }}">Waiting for Approval</a>
-                        <a class="collapse-item" href="{{ url('approved-comments') }}">Approved Comments</a>
-                    </div>
-                </div>
             </li>
 
-            <!-- Nav Item - Subscribers Collapse Menu -->
+            <!-- Nav Item - Subscribers -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight" aria-expanded="true" aria-controls="collapseEight">
+                <a class="nav-link" href="{{ url('subscribers') }}">
                     <i class="fas fa-thin fa-users"></i>
                     <span>Subscribers</span>
                 </a>
             </li>
 
 
-            <!-- Nav Item - Settings Collapse Menu -->
+            <!-- Nav Item - Settings -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Websites Settings</span>
                 </a>
@@ -373,6 +336,14 @@
                     @yield('content')
 
                     @yield('dashboard')
+
+                    @yield('category')
+
+                    @yield('post')
+
+                    @yield('tags')
+
+                    @yield('comments')
 
 
                 </div>
