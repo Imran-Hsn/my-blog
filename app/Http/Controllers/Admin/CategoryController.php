@@ -78,7 +78,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return "edit";
+        $data = Category::find($id);
+        return view('admin.category.edit', ['data'=>$data]);
     }
 
     /**
@@ -88,9 +89,21 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        // return view('admin.category.update');
+        $this->validate($request, [
+            'categoryName' => "required|unique:categories,name, $category->name",
+        ]);
+        
+        $category = Category::find($request->categoryId);
+        $category->name = $request->categoryName;
+        $category->slug = Str::of($category->name)->slug('-');
+        $category->save();
+
+        Session::flash('success', 'Category Updated Successfully');
+        return redirect('admin/category');
+
+        // return dd($request->all());
     }
 
     /**
