@@ -8,12 +8,14 @@
       <div class="col sm-6">
         <h2>Category</h2>
       </div>
+
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Category</li>
         </ol>
       </nav>
+
     </div>
   </div>
 </div>
@@ -27,16 +29,17 @@
           <div class="card-header">
             <div class="d-flex justify-content-between align-item-center">
               <h5 class="card-title">Category List</h5>
-              <a class="btn btn-primary" href="#">Create Category</a>
+              <a class="btn btn-primary" href="{{ route('category.create') }}">Create Category</a>
             </div>
           </div>
 
-          <!-- table -->
 
-          <div class="card-body">
-            <table class="table table-bordered text-dark">
+
+          <!-- table -->
+            <table class="table table-hover text-dark">
               <thead>
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Slug</th>
                   <th>Post Count</th>
@@ -45,25 +48,30 @@
               </thead>
 
               <tbody>
+                @foreach($items as $category)
                 <tr>
-                  <td>Imran</td>
-                  <td>imran</td>
-                  <td>1</td>
+                  <td>{{ $category->id }}</td>
+                  <td>{{ $category->name }}</td>
+                  <td>{{ $category->slug }}</td>
                   <td>bla bla</td>
+                  <td class="d-flex">
+                    <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
+                    <form action="{{ route('category.destroy', [$category->id]) }}" class="mr-1">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger"><i class="fa fas fa-trash"></i></button>
+                    </form>
+                  </td>
                 </tr>
+                @endforeach
               </tbody>
             </table>
-          </div>
           <!-- end of table -->
-
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
 
 
 @endsection()

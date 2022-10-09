@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+
+use function PHPUnit\Framework\returnSelf;
 
 class CategoryController extends Controller
 {
@@ -15,7 +19,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        // $items = Category::all();
+
+        $items = Category::orderBy('created_at', 'DESC')->paginate(15);
+        return view('admin.category.index', ['items'=>$items]);
+        // return view('admin.category.index');
     }
 
     /**
@@ -25,7 +33,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -36,25 +44,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
-            'tagname' => 'required'
+            'categoryName' => 'required|unique:categories,name',
         ]);
 
         $category = new Category();
-        $category->name = $request->tagname;
-        $category->slug = strtolower($category->name);
+        $category->name = $request->categoryName;
+        $category->slug = Str::of($category->name)->slug('-');
         $category->save();
 
-        if($category->save()) {
-            
-            $msg = "<h2>Category Added Successfully</h2>";
-            return view('admin.category.create-category', ['msg'=>$msg]);
-        }
-        else {
-            $err_msg = "<h2>Failed to Add Category</h2>";
-            return view('admin.category.create-category', ['msg'=>$err_msg]);
-        }
-
+        Session::flash('success', 'Category Added Successfully');
+        // Session::flash('success', 'Task was successful!');
+        return redirect('admin/category');
     }
 
     /**
@@ -65,7 +67,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        // return "Show";
     }
 
     /**
@@ -76,7 +78,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "edit";
     }
 
     /**
@@ -88,7 +90,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return view('admin.category.update');
+        // return view('admin.category.update');
     }
 
     /**
@@ -99,6 +101,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "destroy";
     }
 }

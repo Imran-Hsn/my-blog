@@ -22,7 +22,16 @@ Route::get('/', function () {
 Route::view('/dashboard', 'admin.dashboard');
 
 // Category Routes
-// Route::post('category', [CategoryController::class, 'store'])->name('category.store');
-// Route::get('category', [CategoryController::class, 'store'])->name('category.store');
 
-Route::get('category', [CategoryController::class, 'index']);
+Route::get('admin/category', [CategoryController::class, 'index'])->name('category.index');
+
+Route::get('admin/category/create', [CategoryController::class, 'create'])->name('category.create');
+Route::post('admin/category/create', [CategoryController::class, 'create'])->name('category.create');
+
+
+Route::get('category', [CategoryController::class, 'store'])->name('category.store');
+Route::post('category', [CategoryController::class, 'store'])->name('category.store');
+
+Route::get('admin/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+Route::put('admin/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+Route::delete('admin/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');

@@ -18,6 +18,9 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <!-- Toastr Link -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+
 </head>
 
 <body id="page-top">
@@ -65,8 +68,9 @@
 
             <!-- Nav Item - Category -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('category') }}">
-                    <i class="fas fa-solid fa-list"></i>
+                <a class="nav-link" href="{{ route('category.index') }}">
+                    <i class="fas fa-solid fa-tag"></i>
+
                     <span>Category</span>
                 </a>
             </li>
@@ -75,7 +79,7 @@
             <!-- Nav Item - Subcategory -->
             <li class="nav-item">
                 <a class="nav-link" href="{{url('tags')}}">
-                    <i class="fas fa-solid fa-list"></i>
+                    <i class="fas fa-solid fa-tags"></i>
                     <span>Tags</span>
                 </a>
             </li>
@@ -403,6 +407,15 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('/assets/js/sb-admin-2.min.js' ) }}"></script>
+
+    <!-- Toastr js file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <script>
+        @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+        @endif
+        </script>
 
 </body>
 
