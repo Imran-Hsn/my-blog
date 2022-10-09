@@ -34,4 +34,4 @@ Route::post('category', [CategoryController::class, 'store'])->name('category.st
 
 Route::get('admin/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 Route::post('admin/category/edit', [CategoryController::class, 'update'])->name('category.update');
-Route::delete('admin/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+Route::get('admin/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');

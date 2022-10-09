@@ -56,7 +56,7 @@
                   <td>bla bla</td>
                   <td class="d-flex">
                     <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
-                    <form action="{{ route('category.destroy', [$category->id]) }}" class="mr-1">
+                    <form action="{{ route('category.destroy', [$category->id]) }}" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger"><i class="fa fas fa-trash"></i></button>
@@ -66,11 +66,14 @@
                 @endforeach
               </tbody>
             </table>
-          <!-- end of table -->
-        </div>
+            <!-- end of table -->
+          </div>
       </div>
     </div>
   </div>
+</div>
+<div class="container-fluid mt-3">
+{{ $items->links() }}
 </div>
 
 

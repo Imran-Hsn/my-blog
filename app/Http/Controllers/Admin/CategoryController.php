@@ -21,7 +21,7 @@ class CategoryController extends Controller
     {
         // $items = Category::all();
 
-        $items = Category::orderBy('created_at', 'DESC')->paginate(15);
+        $items = Category::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.category.index', ['items'=>$items]);
         // return view('admin.category.index');
     }
@@ -46,7 +46,7 @@ class CategoryController extends Controller
     {
         
         $this->validate($request, [
-            'categoryName' => 'required|unique:categories,name',
+            'categoryName' => 'required|max:35|unique:categories,name',
         ]);
 
         $category = new Category();
@@ -92,7 +92,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $this->validate($request, [
-            'categoryName' => "required|unique:categories,name, $category->name",
+            'categoryName' => "required|max:35|unique:categories,name, $category->name",
         ]);
         
         $category = Category::find($request->categoryId);
@@ -114,6 +114,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        return "destroy";
+        $data = Category::find($id);
+        $data->delete();
+
+        Session::flash('success', 'Category Deleted Successfully');
+
+        return redirect(route('category.index'));
     }
 }
