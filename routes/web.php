@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+// use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,39 +17,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('admin.dashboard');
-});
+})->name('home');
 
 Route::view('/dashboard', 'admin.dashboard');
 
-Route::view('user', 'users.users');
+// Category Routes
+// Route::post('category', [CategoryController::class, 'store'])->name('category.store');
+// Route::get('category', [CategoryController::class, 'store'])->name('category.store');
 
-
-Route::view('author', 'author.dashboard');
-
-Route::view('category', 'category.category');
-Route::view('add-category', 'category.add-category');
-Route::view('manage-category', 'category.manage-category');
-
-Route::view('tags', 'tags.tags');
-
-// Comments route
-Route::view('comments', 'comments.comments');
-Route::view('approved-comments', 'comments.approved-comments');
-Route::view('comments-approval', 'comments.waiting-for-approval');
-
-Route::view('about-us', 'pages.about-us');
-Route::view('contact-us', 'pages.contact-us');
-
-Route::view('posts', 'posts.posts');
-Route::view('create-posts', 'posts.create-posts');
-Route::view('manage-posts', 'posts.manage-posts');
-Route::view('trash-post', 'posts.trash-post');
-
-Route::view('pages', 'pages.pages');
-
-Route::view('subscribers', 'subscribers');
-Route::view('settings', 'settings');
-
-
-// TODO: - todo note
-// FIXME: - fix something
+Route::get('category', [CategoryController::class, 'index']);
