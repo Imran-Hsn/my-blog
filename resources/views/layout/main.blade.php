@@ -76,9 +76,9 @@
             </li>
 
 
-            <!-- Nav Item - Subcategory -->
+            <!-- Nav Item - Tags -->
             <li class="nav-item">
-                <a class="nav-link" href="{{url('tags')}}">
+                <a class="nav-link" href="{{ route('tag.index') }}">
                     <i class="fas fa-solid fa-tags"></i>
                     <span>Tags</span>
                 </a>

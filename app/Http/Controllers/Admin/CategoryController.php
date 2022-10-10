@@ -55,7 +55,6 @@ class CategoryController extends Controller
         $category->save();
 
         Session::flash('success', 'Category Added Successfully');
-        // Session::flash('success', 'Task was successful!');
         return redirect('admin/category');
     }
 
@@ -101,7 +100,7 @@ class CategoryController extends Controller
         $category->save();
 
         Session::flash('success', 'Category Updated Successfully');
-        return redirect('admin/category');
+        return redirect(route('category.index'));
 
         // return dd($request->all());
     }
