@@ -19,7 +19,10 @@
     <link href="{{ asset('/assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Toastr Link -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+    <!-- Custom file input -->
+
 
 </head>
 
@@ -45,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('dashboard') }}">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -67,7 +70,7 @@
             </li>
 
             <!-- Nav Item - Category -->
-            <li class="nav-item">
+            <li class="nav-item {{ Request::is('admin/category') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('category.index') }}">
                     <i class="fas fa-solid fa-tag"></i>
 
@@ -77,7 +80,7 @@
 
 
             <!-- Nav Item - Tags -->
-            <li class="nav-item">
+            <li class="nav-item {{ Request::is('admin/tag') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('tag.index') }}">
                     <i class="fas fa-solid fa-tags"></i>
                     <span>Tags</span>
@@ -85,18 +88,10 @@
             </li>
 
             <!-- Nav Item - Posts -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('posts') }}">
-                    <i class="fas fa-solid fa-list"></i>
+            <li class="nav-item {{ Request::is('admin/post') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('post.index') }}">
+                    <i class="fas fa-solid fa-pen-square"></i>
                     <span>Posts</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Pages -->
-            <li class="nav-item">
-                <a class="nav-link href="{{ url('pages') }}">
-                <i class="fas fa-solid fa-list"></i>
-                    <span>Pages</span>
                 </a>
             </li>
 
@@ -109,20 +104,13 @@
                 </a>
             </li>
 
-            <!-- Nav Item - Subscribers -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('subscribers') }}">
-                    <i class="fas fa-thin fa-users"></i>
-                    <span>Subscribers</span>
-                </a>
-            </li>
 
 
             <!-- Nav Item - Settings -->
             <li class="nav-item">
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Websites Settings</span>
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span>Settings</span>
                 </a>
             </li>
 
@@ -410,12 +398,20 @@
 
     <!-- Toastr js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
+
+
     <script>
         @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
         @endif
-        </script>
+
+
+
+        $('.custom-file-input').on('change', function() {
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+    </script>
 
 </body>
 

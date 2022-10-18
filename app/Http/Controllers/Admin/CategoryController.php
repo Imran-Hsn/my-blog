@@ -55,7 +55,7 @@ class CategoryController extends Controller
         $category->save();
 
         Session::flash('success', 'Category Added Successfully');
-        return redirect('admin/category');
+        return redirect(route('category.index'));
     }
 
     /**

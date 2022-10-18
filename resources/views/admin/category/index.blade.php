@@ -55,7 +55,7 @@
                 <td>{{ $category->created_at }}</td>
                 <td>{{ $category->updated_at }}</td>
                 <td class="d-flex">
-                  <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
+                  <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-pencil-alt"></i></a>
                   <form action="{{ route('category.destroy', [$category->id]) }}" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
                     @csrf
                     @method('DELETE')
@@ -71,7 +71,7 @@
     </div>
   </div>
 </div>
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-2">
   {{ $items->links() }}
 </div>
 
