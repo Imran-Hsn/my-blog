@@ -19,8 +19,9 @@ use App\Http\Controllers\Admin\TagController;
 //     return view('admin.dashboard');
 // })->name('home');
 
+Route::view('/', 'welcome');
 
-Route::view('/dashboard', 'admin.dashboard')->name('home');
+Route::view('admin/dashboard', 'admin.dashboard')->name('home');
 
 // Category Routes
 Route::get('admin/category', [CategoryController::class, 'index'])->name('category.index');
@@ -44,5 +45,8 @@ Route::post('admin/tag/{id}', [TagController::class, 'destroy'])->name('tag.dest
 Route::get('admin/post', [PostController::class, 'index'])->name('post.index');
 Route::get('admin/post/create', [PostController::class, 'create'])->name('post.create');
 Route::post('admin/post', [PostController::class, 'store'])->name('post.store');
-Route::get('admin/post/{id}', [PostController::class, 'show'])->name('post.show');
-Route::get('admin/post/edit/{id}', [PostController::class, 'edit'])->name('post.edit');
+// Route::get('admin/post/{id}', [PostController::class, 'show'])->name('post.show');
+Route::get('admin/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::post('admin/post/update', [PostController::class, 'update'])->name('post.update');
+Route::get('admin/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+Route::post('admin/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');

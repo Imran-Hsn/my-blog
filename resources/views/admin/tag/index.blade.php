@@ -29,7 +29,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
                             <h5 class="card-title">Tags List</h5>
-                            <a class="btn btn-primary" href="{{ route('tag.create') }}">Create Tag</a>
+                            <a class="btn btn-primary" href="{{ route('tag.create') }}"><i class="fa fa-plus"></i> Add Tag</a>
                         </div>
                     </div>
 

@@ -29,7 +29,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
                             <h5 class="card-title">Post List</h5>
-                            <a href="{{ route('post.create') }}" class="btn btn-primary">Create Post</a>
+                            <a href="{{ route('post.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Post</a>
                         </div>
                     </div>
 
@@ -62,9 +62,13 @@
                                 <td>{{ $post->category->name }}</td>
                                 <td>{{ $post->author_id }}</td>
                                 <td>{{ $post->created_at->format('d/m/Y') }}</td>
-                                <td>
-                                    <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
+                                <td class="d-flex">
+                                    <a href="#" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
                                     <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
+                                    <form action="{{ route('post.destroy', [$post->id]) }}" onclick="return confirm('Are You Sure To Delete?')" method="POST" class="mr-1">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
+                                    </form>
 
                                 </td>
 

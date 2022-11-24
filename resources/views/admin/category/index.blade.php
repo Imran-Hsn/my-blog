@@ -29,7 +29,7 @@
           <div class="card-header">
             <div class="d-flex justify-content-between align-item-center">
               <h5 class="card-title">Category List</h5>
-              <a class="btn btn-primary" href="{{ route('category.create') }}">Create Category</a>
+              <a class="btn btn-primary" href="{{ route('category.create') }}"><i class="fa fa-plus"></i> Add Category</a>
             </div>
           </div>
 
@@ -55,7 +55,7 @@
                 <td>{{ $category->created_at }}</td>
                 <td>{{ $category->updated_at }}</td>
                 <td class="d-flex">
-                  <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-pencil-alt"></i></a>
+                  <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
                   <form action="{{ route('category.destroy', [$category->id]) }}" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
                     @csrf
                     @method('DELETE')

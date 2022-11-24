@@ -9,50 +9,54 @@ use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+// use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\File;
+
 
 class PostController extends Controller
 {
     public function index()
     {
         $data = Post::orderby('created_at', 'desc')->paginate(10);
-        return view('admin.post.index', ['data'=>$data]);
+        return view('admin.post.index', ['data' => $data]);
     }
 
-// Create Post
+    // Create Post
     public function create()
     {
         $tags = Tag::all();
         $data = Category::all();
-        return view('admin.post.create', ['data'=>$data, 'tags'=>$tags]);
+        return view('admin.post.create', ['data' => $data, 'tags' => $tags]);
     }
 
-// Store Post
+    // Store Post
     public function store(Request $request)
     {
         $this->validate($request, [
             'title' => 'required|max:255|unique:posts',
             'description' => 'required',
             'category' => 'required',
+            'image' => 'image|mimes:jpg,png',
         ]);
 
         $post = Post::create([
             'title' => $request->title,
             'slug' => Str::of($request->title)->slug('-'),
             'description' => $request->description,
-            'category_id'=> $request->category,
+            'category_id' => $request->category,
             'author_id' => 2,
         ]);
         $post->tags()->attach($request->tags);
 
 
-        if($request->has('image')) 
-        {
+        if ($request->has('image')) {
             $post->image = $request->image;
             $image_new_name = time() . '.' . $request->image->getClientOriginalExtension();
             $post->image->move('storage/post', $image_new_name);
             $post->image = '/storage/post/' . $image_new_name;
-            $post->save();
         }
+
+        $post->save();
 
         Session::flash('success', 'Post Created Successfully');
         return redirect()->route('post.index');
@@ -63,13 +67,61 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        return view('admin.post.show', ['post'=>$post]);
+        return view('admin.post.show', ['post' => $post]);
     }
 
     // Edit Post
-    public function edit($id) 
+    public function edit($id)
     {
-        return "Hello From Edit";
+        $post = Post::find($id);
+        $categories = Category::all();
+        return view('admin.post.edit', compact(['post', 'categories']));
     }
 
+    //Update Post
+    public function update(Request $request, Post $post)
+    {
+        $this->validate($request, [
+            'postTitle' => 'required|max:255',
+            'postDescription' => 'required',
+            'postCategory' => 'required',
+            'image' => 'image|mimes:jpg,png',
+        ]);
+
+        $post = Post::find($request->postId);
+        $post->title = $request->postTitle;
+        $post->slug = Str::of($request->postTitle)->slug('-');
+        $post->description = $request->postDescription;
+        $post->category_id = $request->postCategory;
+        $post->author_id = 3;
+
+        if ($request->has('postImage')) {
+            $post->image = $request->postImage;
+            $image_new_name = time() . '.' . $request->postImage->getClientOriginalExtension();
+            $post->image->move('storage/post', $image_new_name);
+            $post->image = '/storage/post/' . $image_new_name;
+        }
+
+        $post->save();
+
+        Session::flash('success', 'Post Updated Successfully');
+        return redirect(route('post.index'));
+    }
+
+    public function destroy(Post $post, $id)
+    {
+
+        $post = Post::find($id);
+
+        if($post) {
+            if(file_exists(public_path($post->image))){
+                unlink(public_path($post->image));
+            }
+        }
+        
+        $delete_post = Post::where('id', $id)->delete();
+
+        Session::flash('success', 'Post Deleted Successfully');
+        return redirect(route('post.index'));
+    }
 }

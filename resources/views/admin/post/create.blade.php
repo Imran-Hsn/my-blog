@@ -41,6 +41,8 @@
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
+                    <span class="text-danger">@error('category') {{ $message }} @enderror</span>
+
                 </div>
 
                 <div class="form-group">
@@ -49,9 +51,12 @@
                         <input type="file" name="image" id="image" class="custom-file-input">
                         <label for="image" class="custom-file-label text-truncate">Choose file...</label>
                     </div>
+                    <span class="text-danger">@error('image') {{ $message }} @enderror</span>
+
                 </div>
 
                 <div class="form-group">
+                    <label for="tags">Tags: </label>
                     @foreach($tags as $tag)
                     <div class="custom-control custom-checkbox">
                         <input class="custom-control-input" type="checkbox" name="tags[]" id="tag{{ $tag->id }}" value="{{ $tag->id }}">

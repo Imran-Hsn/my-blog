@@ -13,11 +13,7 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{ $post->title }}</td>
-            <td>{{ $post->category_id }}</td>
-            <td>tags_will_go_here</td>
-            <td>{{ $post->created_at }}</td>
-            <td>{{ $post->author_id }}</td>
+
         </tr>
     </tbody>
 </table>
