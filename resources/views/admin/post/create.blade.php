@@ -61,7 +61,6 @@
                     <div class="custom-control custom-checkbox">
                         <input class="custom-control-input" type="checkbox" name="tags[]" id="tag{{ $tag->id }}" value="{{ $tag->id }}">
                         <label for="tag{{ $tag->id }}" class="custom-control-label">{{ $tag->name }}</label>
-
                     </div>
                     @endforeach()
                 </div>

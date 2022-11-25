@@ -41,6 +41,7 @@
                                 <th>Image</th>
                                 <th>Description</th>
                                 <th>Category</th>
+                                <th>Tags</th>
                                 <th>Author</th>
                                 <th>Created_at</th>
                                 <th>Action</th>
@@ -60,6 +61,12 @@
 
                                 <td>{{ Str::limit($post->description, 20) }}</td>
                                 <td>{{ $post->category->name }}</td>
+                                <td>
+                                    @foreach($post->tags as $tag)
+                                    <span class="badge badge-danger">{{ $tag->name }}</span>
+                                    @endforeach
+
+                                </td>
                                 <td>{{ $post->author_id }}</td>
                                 <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                 <td class="d-flex">

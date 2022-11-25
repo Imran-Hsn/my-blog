@@ -9,9 +9,6 @@ use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
-// use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\File;
-
 
 class PostController extends Controller
 {
@@ -75,7 +72,8 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $categories = Category::all();
-        return view('admin.post.edit', compact(['post', 'categories']));
+        $tags = Tag::all();
+        return view('admin.post.edit', ['post'=>$post, 'categories'=>$categories, 'tags'=>$tags]);
     }
 
     //Update Post
@@ -85,6 +83,7 @@ class PostController extends Controller
             'postTitle' => 'required|max:255',
             'postDescription' => 'required',
             'postCategory' => 'required',
+            'postTags' => 'required',
             'image' => 'image|mimes:jpg,png',
         ]);
 
@@ -94,6 +93,9 @@ class PostController extends Controller
         $post->description = $request->postDescription;
         $post->category_id = $request->postCategory;
         $post->author_id = 3;
+
+
+        $post->tags()->sync($request->postTags);
 
         if ($request->has('postImage')) {
             $post->image = $request->postImage;
