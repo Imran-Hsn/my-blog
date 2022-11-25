@@ -20,7 +20,6 @@
     </div>
 </div>
 
-
 <div class="content">
     <div class="container-fluid mt-3">
         <div class="row">
@@ -52,33 +51,28 @@
                             <tr>
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
-
                                 <td>
                                     <div style="max-height: 40px; max-width: 70px; overflow:hidden;">
                                         <img src="{{ asset($post->image) }}" class="img-fluid">
                                     </div>
                                 </td>
-
                                 <td>{{ Str::limit($post->description, 20) }}</td>
                                 <td>{{ $post->category->name }}</td>
                                 <td>
                                     @foreach($post->tags as $tag)
-                                    <span class="badge badge-danger">{{ $tag->name }}</span>
+                                    <span class="badge badge-info">{{ $tag->name }}</span>
                                     @endforeach
-
                                 </td>
                                 <td>{{ $post->author_id }}</td>
                                 <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                 <td class="d-flex">
-                                    <a href="#" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
+                                    <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
                                     <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
                                     <form action="{{ route('post.destroy', [$post->id]) }}" onclick="return confirm('Are You Sure To Delete?')" method="POST" class="mr-1">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
                                     </form>
-
                                 </td>
-
                             </tr>
                             @endforeach
                         </tbody>
@@ -87,5 +81,4 @@
             </div>
         </div>
     </div>
-
     @endsection()

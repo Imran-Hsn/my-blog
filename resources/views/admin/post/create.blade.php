@@ -15,7 +15,6 @@
                     <li class="breadcrumb-item active" aria-current="page">Create Post</li>
                 </ol>
             </nav>
-
         </div>
     </div>
 </div>
@@ -42,7 +41,6 @@
                         @endforeach
                     </select>
                     <span class="text-danger">@error('category') {{ $message }} @enderror</span>
-
                 </div>
 
                 <div class="form-group">
@@ -52,7 +50,6 @@
                         <label for="image" class="custom-file-label text-truncate">Choose file...</label>
                     </div>
                     <span class="text-danger">@error('image') {{ $message }} @enderror</span>
-
                 </div>
 
                 <div class="form-group">
@@ -71,13 +68,10 @@
                     <span class="text-danger">@error('description') {{ $message }} @enderror</span>
                 </div>
 
-
                 <a href="{{ route('post.index') }}"><button type="button" class="btn btn-warning mr-3 btn-lg">Back</button></a>
                 <button type="submit" class="btn btn-primary btn-lg">Add</button>
             </form>
         </div>
     </div>
 </div>
-
-
 @endsection()

@@ -1,8 +1,24 @@
 @extends('layout.main')
 @section('post')
 
-<h4>Edit Post</h4>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col sm-6">
+                <h2>Edit Post</h2>
+            </div>
 
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('post.index') }}">Post</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+<hr>
 
 <div class="card-body">
     <div class="form-group">
@@ -10,7 +26,6 @@
 
             <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <input type="hidden" class="form-control" id="postId" value="{{ $post->id }}" name="postId">
 
                 <div class="form-group">
@@ -21,7 +36,7 @@
 
                 <div class="form-group">
                     <label for="postDescription">Description: </label>
-                    <input type="text" class="form-control" id="postDescription" value="{{ $post->description }}" name="postDescription">
+                    <textarea class="form-control" id="postDescription" cols="30" rows="5"  name="postDescription">{{ $post->description }}</textarea>
                     <span class="text-danger">@error('postDescription') {{ $message }} @enderror</span>
                 </div>
 
@@ -42,9 +57,8 @@
                     <label for="postTags">Tags: </label>
                     <div class="custom-control custom-checkbox">
                         @foreach($tags as $tag)
-                        <input class="custom-control-checkbox" type="checkbox" name="postTags[]" value="{{ $tag->id }}" id="postTags{{ $tag->id }}"
-                        @foreach($post->tags as $selected_tag)
-                            @if($tag->id == $selected_tag->id) checked @endif
+                        <input class="custom-control-checkbox" type="checkbox" name="postTags[]" value="{{ $tag->id }}" id="postTags{{ $tag->id }}" @foreach($post->tags as $selected_tag)
+                        @if($tag->id == $selected_tag->id) checked @endif
                         @endforeach>
                         <label for="postTags{{ $tag->id }}">{{ $tag->name }} </label>
                         @endforeach
@@ -68,17 +82,10 @@
                     </div>
                 </div>
 
-
-    <a href="{{ route('post.index') }}"><button type="button" class="btn btn-warning mr-3 btn-lg">Back</button></a>
-    <button type="submit" class="btn btn-lg btn-primary">Update</button>
-    </form>
-
-
-
-
-
+                <a href="{{ route('post.index') }}"><button type="button" class="btn btn-warning mr-3 btn-lg">Back</button></a>
+                <button type="submit" class="btn btn-lg btn-primary">Update</button>
+            </form>
+        </div>
     </div>
-    </div>
-
 </div>
 @endsection()

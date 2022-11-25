@@ -45,7 +45,6 @@ class PostController extends Controller
         ]);
         $post->tags()->attach($request->tags);
 
-
         if ($request->has('image')) {
             $post->image = $request->image;
             $image_new_name = time() . '.' . $request->image->getClientOriginalExtension();
@@ -93,7 +92,6 @@ class PostController extends Controller
         $post->description = $request->postDescription;
         $post->category_id = $request->postCategory;
         $post->author_id = 3;
-
 
         $post->tags()->sync($request->postTags);
 
