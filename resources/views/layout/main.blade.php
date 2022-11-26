@@ -70,7 +70,7 @@
             </li>
 
             <!-- Nav Item - Category -->
-            <li class="nav-item {{ Request::is('admin/category') ? 'active' : ''}}">
+            <li class="nav-item {{ Request::is('admin/dashboard/category') ? 'active' : ''}}">
                 <a class="nav-link" href="{{ route('category.index') }}">
                     <i class="fas fa-solid fa-tag"></i>
 
@@ -80,7 +80,7 @@
 
 
             <!-- Nav Item - Tags -->
-            <li class="nav-item {{ Request::is('admin/tag') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('admin/dashboard/tag') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('tag.index') }}">
                     <i class="fas fa-solid fa-tags"></i>
                     <span>Tags</span>
@@ -88,7 +88,7 @@
             </li>
 
             <!-- Nav Item - Posts -->
-            <li class="nav-item {{ Request::is('admin/post') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('admin/dashboard/post') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('post.index') }}">
                     <i class="fas fa-solid fa-pen-square"></i>
                     <span>Posts</span>
@@ -291,7 +291,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Imran Hasan</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -378,7 +378,12 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
