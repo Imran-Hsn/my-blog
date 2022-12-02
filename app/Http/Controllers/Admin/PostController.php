@@ -9,9 +9,16 @@ use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    //Checking here if user is logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $data = Post::orderby('created_at', 'desc')->paginate(10);
@@ -41,7 +48,7 @@ class PostController extends Controller
             'slug' => Str::of($request->title)->slug('-'),
             'description' => $request->description,
             'category_id' => $request->category,
-            'author_id' => 2,
+            'user_id' => Auth::user()->id,
         ]);
         $post->tags()->attach($request->tags);
 
@@ -91,7 +98,7 @@ class PostController extends Controller
         $post->slug = Str::of($request->postTitle)->slug('-');
         $post->description = $request->postDescription;
         $post->category_id = $request->postCategory;
-        $post->author_id = 3;
+        $post->user_id = Auth::user()->id;
 
         $post->tags()->sync($request->postTags);
 

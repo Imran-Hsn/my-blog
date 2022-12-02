@@ -60,7 +60,7 @@
                             </tr>
                             <tr>
                                 <th>Author</th>
-                                <td>{{ $post->author_id }}</td>
+                                <td>{{ $post->user->name }}</td>
                             </tr>
                             <tr>
                                 <th>Create Date</th>

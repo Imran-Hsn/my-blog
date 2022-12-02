@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug');
             $table->integer('category_id');
             $table->text('description');
-            $table->integer('author_id');
+            $table->integer('user_id');
             $table->string('image')->nullable();
             $table->timestamps();
         });

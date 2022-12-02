@@ -12,6 +12,12 @@ use function PHPUnit\Framework\returnSelf;
 
 class CategoryController extends Controller
 {
+    //Checking here if user is logged in
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +28,7 @@ class CategoryController extends Controller
         // $items = Category::all();
 
         $items = Category::orderBy('created_at', 'DESC')->paginate(10);
-        return view('admin.category.index', ['items'=>$items]);
+        return view('admin.category.index', ['items' => $items]);
         // return view('admin.category.index');
     }
 
@@ -44,7 +50,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->validate($request, [
             'categoryName' => 'required|max:35|unique:categories,name',
         ]);
@@ -78,7 +84,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $data = Category::find($id);
-        return view('admin.category.edit', ['data'=>$data]);
+        return view('admin.category.edit', ['data' => $data]);
     }
 
     /**
@@ -93,7 +99,7 @@ class CategoryController extends Controller
         $this->validate($request, [
             'categoryName' => "required|max:35|unique:categories,name, $category->name",
         ]);
-        
+
         $category = Category::find($request->categoryId);
         $category->name = $request->categoryName;
         $category->slug = Str::of($category->name)->slug('-');
@@ -113,11 +119,16 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $data = Category::find($id);
-        $data->delete();
+        // $data = Category::find($id);
+        $data =Category::where('id',$id)->first();
 
-        Session::flash('success', 'Category Deleted Successfully');
 
-        return redirect(route('category.index'));
+        if ($data != null) {
+            $data->delete();
+            Session::flash('success', 'Category Deleted Successfully');
+            return redirect(route('category.index'));
+        }
+
+        return redirect()->route('dashboard')->with([ 'Wrong ID!!']);
     }
 }

@@ -57,19 +57,20 @@
                                     </div>
                                 </td>
                                 <td>{{ Str::limit($post->description, 20) }}</td>
-                                <td>{{ $post->category->name }}</td>
+                                <td>{{ $post->category->name ?? 'none'}}</td>
                                 <td>
                                     @foreach($post->tags as $tag)
                                     <span class="badge badge-info">{{ $tag->name }}</span>
                                     @endforeach
                                 </td>
-                                <td>{{ $post->author_id }}</td>
+                                <td>{{ $post->user->name }}</td>
                                 <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                 <td class="d-flex">
                                     <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
                                     <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
                                     <form action="{{ route('post.destroy', [$post->id]) }}" onclick="return confirm('Are You Sure To Delete?')" method="POST" class="mr-1">
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
                                     </form>
                                 </td>

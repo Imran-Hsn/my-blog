@@ -53,14 +53,14 @@
                     <span class="text-danger">@error('postCategory') {{ $message }} @enderror</span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group d-flex">
                     <label for="postTags">Tags: </label>
                     <div class="custom-control custom-checkbox">
                         @foreach($tags as $tag)
                         <input class="custom-control-checkbox" type="checkbox" name="postTags[]" value="{{ $tag->id }}" id="postTags{{ $tag->id }}" @foreach($post->tags as $selected_tag)
                         @if($tag->id == $selected_tag->id) checked @endif
                         @endforeach>
-                        <label for="postTags{{ $tag->id }}">{{ $tag->name }} </label>
+                        <label class="mr-3" for="postTags{{ $tag->id }}">{{ $tag->name }} </label>
                         @endforeach
                     </div>
                 </div>

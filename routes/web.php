@@ -42,12 +42,13 @@ Route::view('admin/dashboard', 'admin.dashboard')->name('home');
 
 // Category Routes
 Route::get('admin/dashboard/category', [CategoryController::class, 'index'])->name('category.index');
-// Route::get('admin/dashboard/category/create', [CategoryController::class, 'create'])->name('category.create');
+Route::get('admin/dashboard/category/create', [CategoryController::class, 'create'])->name('category.create');
 Route::post('admin/dashboard/category/create', [CategoryController::class, 'create'])->name('category.create');
 Route::post('admin/dashboard/category', [CategoryController::class, 'store'])->name('category.store');
 Route::get('admin/dashboard/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 Route::post('admin/dashboard/category/edit', [CategoryController::class, 'update'])->name('category.update');
 Route::get('admin/dashboard/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+Route::delete('admin/dashboard/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 // Tag routes
 Route::get('admin/dashboard/tag', [TagController::class, 'index'])->name('tag.index');
@@ -55,8 +56,8 @@ Route::get('admin/dashboard/tag/create', [TagController::class, 'create'])->name
 Route::post('admin/dashboard/tag', [TagController::class, 'store'])->name('tag.store');
 Route::get('admin/dashboard/tag/{id}/edit', [TagController::class, 'edit'])->name('tag.edit');
 Route::post('admin/dashboard/tag/update', [TagController::class, 'update'])->name('tag.update');
-// Route::get('admin/dashboard/tag/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
-Route::post('admin/dashboard/tag/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
+Route::get('admin/dashboard/tag/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
+Route::delete('admin/dashboard/tag/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
 
 // Post Routes
 Route::get('admin/dashboard/post', [PostController::class, 'index'])->name('post.index');
@@ -64,6 +65,6 @@ Route::get('admin/dashboard/post/create', [PostController::class, 'create'])->na
 Route::post('admin/dashboard/post', [PostController::class, 'store'])->name('post.store');
 Route::get('admin/dashboard/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::post('admin/dashboard/post/update', [PostController::class, 'update'])->name('post.update');
-// Route::get('admin/dashboard/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
-Route::post('admin/dashboard/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+Route::get('admin/dashboard/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
+Route::delete('admin/dashboard/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
 Route::get('admin/dashboard/post/{id}/show', [PostController::class, 'show'])->name('post.show');

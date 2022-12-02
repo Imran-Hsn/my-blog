@@ -52,10 +52,10 @@
                     <span class="text-danger">@error('image') {{ $message }} @enderror</span>
                 </div>
 
-                <div class="form-group">
-                    <label for="tags">Tags: </label>
+                <div class="form-group d-flex">
+                    <label for="tags" class="mr-3">Tags: </label>
                     @foreach($tags as $tag)
-                    <div class="custom-control custom-checkbox">
+                    <div class="custom-control custom-checkbox mr-3">
                         <input class="custom-control-input" type="checkbox" name="tags[]" id="tag{{ $tag->id }}" value="{{ $tag->id }}">
                         <label for="tag{{ $tag->id }}" class="custom-control-label">{{ $tag->name }}</label>
                     </div>
