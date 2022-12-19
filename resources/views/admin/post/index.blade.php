@@ -5,7 +5,7 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col sm-6">
+            <div class="col sm-auto">
                 <h2>Post</h2>
             </div>
 
@@ -23,7 +23,7 @@
 <div class="content">
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-auto col-md-auto col-sm-auto">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-                    <table class="table table-hover text-dark">
+                    <table class="table table-hover text-dark table-responsive">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -82,4 +82,5 @@
             </div>
         </div>
     </div>
-    @endsection()
+</div>
+@endsection()

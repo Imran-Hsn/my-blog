@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -129,6 +129,6 @@ class CategoryController extends Controller
             return redirect(route('category.index'));
         }
 
-        return redirect()->route('dashboard')->with([ 'Wrong ID!!']);
+        return redirect()->route('home')->with([ 'Wrong ID!!']);
     }
 }

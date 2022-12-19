@@ -51,8 +51,9 @@
                                 <td>{{ $tag->updated_at }}</td>
                                 <td class="d-flex">
                                     <a href="{{ route('tag.edit', [$tag->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
-                                    <form action="{{ route('tag.destroy', [$tag->id]) }}" method="delete" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
+                                    <form action="{{ route('tag.destroy', [$tag->id]) }}" method="post" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
                                         @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
                                     </form>
                             </tr>
