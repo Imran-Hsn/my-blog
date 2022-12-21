@@ -30,6 +30,7 @@
             <div class="form-group">
                 <form action="{{ route('tag.update') }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" class="form-control" id="tagId" value="{{ $tag->id }}" name="tagId">
 
                     <label for="categoryName">Category: </label>

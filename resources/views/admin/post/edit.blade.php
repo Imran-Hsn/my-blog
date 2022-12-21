@@ -26,6 +26,7 @@
 
             <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <input type="hidden" class="form-control" id="postId" value="{{ $post->id }}" name="postId">
 
                 <div class="form-group">

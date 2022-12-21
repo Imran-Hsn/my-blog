@@ -30,6 +30,7 @@
             <div class="form-group">
                 <form action="{{ route('category.update') }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" class="form-control" id="categoryId" value="{{ $data->id }}" name="categoryId">
                     <label for="categoryName">Category: </label>
                     <input type="text" class="form-control" id="category" value="{{ $data->name }}" name="categoryName">
