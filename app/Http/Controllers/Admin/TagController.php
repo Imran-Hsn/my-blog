@@ -11,12 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class TagController extends Controller
 {
-    //Checking here if user is logged in
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $items = Tag::orderBy('created_at', 'desc')->paginate(10);

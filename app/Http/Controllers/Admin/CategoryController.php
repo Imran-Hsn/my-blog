@@ -12,12 +12,6 @@ use function PHPUnit\Framework\returnSelf;
 
 class CategoryController extends Controller
 {
-    //Checking here if user is logged in
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      *

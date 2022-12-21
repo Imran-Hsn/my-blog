@@ -69,7 +69,7 @@
                                 </tr>
                                 <tr>
                                     <th>Description</th>
-                                    <td style="word-break: break-all">{{ $post->description }}</td>
+                                    <td class="text-break text-justify">{{ $post->description }}</td>
                                 </tr>
                             </tbody>
                         </table>

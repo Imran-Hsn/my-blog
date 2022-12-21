@@ -13,12 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    //Checking here if user is logged in
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $data = Post::orderby('created_at', 'desc')->paginate(10);
