@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Author\DashboardController as AuthorDashBoardController;
+use Illuminate\Support;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +21,7 @@ use App\Http\Controllers\Admin\TagController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('home');
+Route::view('/','index')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,7 +31,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::prefix('admin/dashboard')->middleware(['auth', 'verified'])->group(function () {
+// Admin Dashboard
+Route::get('admin/dashboard', [
+    AdminDashboardController::class, 'index'
+])->middleware(['auth', 'verified', 'admin'])->name('admin.dashboard');
+
+Route::prefix('admin/dashboard')->middleware(['auth', 'verified', 'admin'])->group(function () {
     // Category Routes
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -58,4 +61,16 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'verified'])->group(functi
     Route::put('/post/update', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
     Route::get('/post/{id}/show', [PostController::class, 'show'])->name('post.show');
+
+    // Author routes
+    Route::get('/author', [AuthorController::class, 'index'])->name('author.index');
 });
+
+
+
+
+
+// Author Dashboard
+Route::get('author/dashboard', [
+    AuthorDashBoardController::class, 'index'
+])->middleware(['auth', 'verified', 'author'])->name('author.dashboard');

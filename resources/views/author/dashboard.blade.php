@@ -39,30 +39,3 @@
     <!-- </div> -->
 </div>
 @endsection()
-
-
-
-
-
-
-
-
-
-
-
-<!-- <style>
-    #dash {
-  width: 30%; height: 120px;
-  height: 100px;
-  border border-dark rounded rounded-3 align-items-center: 3px solid grey;
-  padding: 10px;
-  margin: 10px;
-  display: inline-block;
-  /* text-align: left; */
-}
-
-#dash_title {
-    list-style: none;
-    display: inline-block;
-}
-</style> -->

@@ -1,18 +1,18 @@
 @extends('layout.main')
 
-@section('category')
+@section('author')
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col sm-6">
-                <h2>Category</h2>
+                <h2>Author</h2>
             </div>
 
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    <li class="breadcrumb-item active" aria-current="page">Author</li>
                 </ol>
             </nav>
 
@@ -28,8 +28,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
-                            <h5 class="card-title">Category List</h5>
-                            <a class="btn btn-primary" href="{{ route('category.create') }}"><i class="fa fa-plus"></i> Add Category</a>
+                            <h5 class="card-title">Author List</h5>
+                            <a class="btn btn-primary" href="{{ route('category.create') }}"><i class="fa fa-plus"></i> Add Author</a>
                         </div>
                     </div>
 
@@ -47,22 +47,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach($items as $category)
-                                <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->created_at }}</td>
-                                    <td>{{ $category->updated_at }}</td>
-                                    <td class="d-flex">
-                                        <a href="{{ route('category.edit', [$category->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
-                                        <form action="{{ route('category.destroy', [$category->id]) }}" onclick="return confirm('Are You Sure To Delete?')" class="mr-1" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
+                               
                             </tbody>
                         </table>
                     </div>
@@ -73,7 +58,6 @@
 </div>
 
 <div class="container-fluid mt-2">
-    {{ $items->links() }}
 </div>
 
 @endsection()

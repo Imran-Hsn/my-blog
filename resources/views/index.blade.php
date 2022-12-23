@@ -31,13 +31,16 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                     @else
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Dashboard</a></li>
+                    @if(Auth()->user()->role->id == 1)
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    @elseif(Auth()->user()->role->id == 2)
+                    <li class="nav-item"><a class="nav-link" href="{{ route('author.dashboard') }}">Dashboard</a></li>
+                    @endif
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-secondary rounded pill" type="submit">Logout</button>
-                      </form>
+                    </form>
                     @endif
-
                 </ul>
             </div>
         </div>

@@ -48,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -63,7 +63,7 @@
 
             <!-- Nav Item - Pages -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('author') }}">
+                <a class="nav-link" href="{{ route('author.index') }}">
                     <i class="fas fa-thin fa-user"></i>
                     <span>Author</span>
                 </a>
@@ -328,6 +328,8 @@
                     @yield('content')
 
                     @yield('dashboard')
+
+                    @yield('author')
 
                     @yield('category')
 
