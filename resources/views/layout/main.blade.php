@@ -73,7 +73,7 @@
             </li>
 
             <!-- Nav Item - Author -->
-            <li class="nav-item">
+            <li class="nav-item {{ Request::is('admin/dashboard/author') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('author.index') }}">
                     <i class="fas fa-thin fa-user"></i>
                     <span>Author</span>
@@ -180,7 +180,7 @@
                         </div>
                     </form>
 
-                    <!-- Topbar Navbar -->
+                    <!-- Top Bar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -203,14 +203,14 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
+                        <!-- Nav Item Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            <!-- Dropdown Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
                                     Alerts Center
@@ -360,12 +360,12 @@
 
                     @yield('dashboard')
 
-                    @yield('author')
-
-                    @yield('category')
-
+                    
+                    
                     @yield('post')
-
+                    
+                    @yield('author')
+                    @yield('category')
                     @yield('tags')
 
                     @yield('comments')

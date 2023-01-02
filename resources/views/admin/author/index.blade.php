@@ -29,25 +29,38 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
                             <h5 class="card-title">Author List</h5>
-                            <a class="btn btn-primary" href="{{ route('category.create') }}"><i class="fa fa-plus"></i> Add Author</a>
+                            <a class="btn btn-primary" href="{{ route('author.create') }}"><i class="fa fa-plus"></i> Add Author</a>
                         </div>
                     </div>
 
                     <!-- table -->
-                    <div class="table-responsive{-sm | -md | -lg | -xl}">
+                    <div class="table-responsive">
                         <table class="table table-hover text-dark overflow-auto">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Created_at</th>
-                                    <th>Updated_at</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                               
+                                @foreach($authors as $author)
+                                <tr>
+                                    <td>{{ $author->id }}</td>
+                                    <td>{{ $author->name }}</td>
+                                    <td>{{ $author->created_at }}</td>
+                                    <td class="d-flex">
+                                        <a href="{{ route('author.edit', [$author->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
+                                        <form action="{{ route('author.destroy', [$author->id]) }}" onclick="return confirm('Are You Sure To Delete?')" class="mr-1" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class AuthorController extends Controller
 {
@@ -14,7 +17,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return view('admin.author.author');
+        $authors = User::where('role_id', 2)->paginate(15);
+        return view('admin.author.index', ['authors' => $authors]);
     }
 
     /**
@@ -24,7 +28,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.author.create');
     }
 
     /**
@@ -57,7 +61,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Edit Author
+        $data = User::find($id);
+        return view('admin.author.edit', ['data' => $data]);
     }
 
     /**
@@ -67,9 +73,20 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'authorName' => "required|max:35|unique:categories,name, $user->name",
+            'roleId' => "required",
+        ]);
+
+        $user = User::find($request->authorId);
+        $user->name = $request->authorName;
+        $user->role_id = $request->roleId;
+        $user->save();
+
+        Session::flash('success', 'Author Updated Successfully');
+        return redirect(route('author.index'));
     }
 
     /**
@@ -80,6 +97,12 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete Author
+        $post = User::find($id);
+
+        $delete_post = User::where('id', $id)->delete();
+
+        Session::flash('success', 'Author Deleted Successfully');
+        return redirect()->back();
     }
 }
