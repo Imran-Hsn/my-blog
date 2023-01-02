@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Author\DashboardController as AuthorDashBoardController;
-use Illuminate\Support;
+use App\Http\Controllers\Author\PostController as AuthorPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ use Illuminate\Support;
 |
 */
 
-Route::view('/','index')->name('home');
+Route::view('/', 'index')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -53,7 +53,7 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'verified', 'admin'])->gro
     Route::put('/tag/update', [TagController::class, 'update'])->name('tag.update');
     Route::delete('/tag/{id}', [TagController::class, 'destroy'])->name('tag.destroy');
 
-    // Post Routes
+    // Admin Post Routes
     Route::get('/post', [PostController::class, 'index'])->name('post.index');
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post', [PostController::class, 'store'])->name('post.store');
@@ -62,15 +62,24 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'verified', 'admin'])->gro
     Route::delete('/post/{id}', [PostController::class, 'destroy'])->name('post.destroy');
     Route::get('/post/{id}/show', [PostController::class, 'show'])->name('post.show');
 
-    // Author routes
+
     Route::get('/author', [AuthorController::class, 'index'])->name('author.index');
 });
-
-
-
 
 
 // Author Dashboard
 Route::get('author/dashboard', [
     AuthorDashBoardController::class, 'index'
 ])->middleware(['auth', 'verified', 'author'])->name('author.dashboard');
+
+Route::prefix('author/dashboard')->middleware(['auth', 'verified', 'author'])->group(function () {
+
+    // Author Post Routes
+    Route::get('/post', [AuthorPostController::class, 'index'])->name('author.post.index');
+    Route::get('/post/create', [AuthorPostController::class, 'create'])->name('author.post.create');
+    Route::post('/post', [AuthorPostController::class, 'store'])->name('author.post.store');
+    Route::get('/post/{id}/edit', [AuthorPostController::class, 'edit'])->name('author.post.edit');
+    Route::put('/post/update', [AuthorPostController::class, 'update'])->name('author.post.update');
+    Route::delete('/post/{id}', [AuthorPostController::class, 'destroy'])->name('author.post.destroy');
+    Route::get('/post/{id}/show', [AuthorPostController::class, 'show'])->name('author.post.show');
+});

@@ -2,6 +2,7 @@
 
 @section('category')
 
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -24,7 +25,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-auto col-sm-auto">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
@@ -34,8 +35,8 @@
                     </div>
 
                     <!-- table -->
-                    <div class="table-responsive{-sm | -md | -lg | -xl}">
-                        <table class="table table-hover text-dark overflow-auto">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>ID</th>

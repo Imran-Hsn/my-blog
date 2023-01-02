@@ -11,7 +11,7 @@
 
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('author.dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Post</li>
                 </ol>
             </nav>
@@ -28,7 +28,7 @@
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-item-center">
                             <h5 class="card-title">Post List</h5>
-                            <a href="{{ route('post.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Post</a>
+                            <a href="{{ route('author.post.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Create Post</a>
                         </div>
                     </div>
 
@@ -67,9 +67,9 @@
                                     <td>{{ $post->user->name }}</td>
                                     <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                     <td class="d-flex">
-                                        <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
-                                        <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
-                                        <form action="{{ route('post.destroy', [$post->id]) }}" onclick="return confirm('Are You Sure To Delete?')" method="POST" class="mr-1">
+                                        <a href="{{ route('author.post.show', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>
+                                        <a href="{{ route('author.post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
+                                        <form action="{{ route('author.post.destroy', [$post->id]) }}" onclick="return confirm('Are You Sure To Delete?')" method="POST" class="mr-1">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>

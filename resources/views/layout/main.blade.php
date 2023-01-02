@@ -36,7 +36,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-solid fa-blog"></i>
                 </div>
@@ -48,9 +48,11 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                @if(Auth()->user()->role->id == 1)
+                <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a>
+                @elseif(Auth()->user()->role->id == 2)
+                <a class="nav-link" href="{{ route('author.dashboard') }}"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a>
+                @endif
             </li>
 
             <!-- Divider -->
@@ -60,8 +62,17 @@
             <div class="sidebar-heading">
                 Interface
             </div>
+            <!-- Permit options only to Admin  -->
+            @if(Request::is('admin*'))
+            <!-- Nav Item - Posts -->
+            <li class="nav-item {{ Request::is('admin/dashboard/post') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('post.index') }}">
+                    <i class="fas fa-solid fa-pen-square"></i>
+                    <span>Posts</span>
+                </a>
+            </li>
 
-            <!-- Nav Item - Pages -->
+            <!-- Nav Item - Author -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('author.index') }}">
                     <i class="fas fa-thin fa-user"></i>
@@ -78,7 +89,6 @@
                 </a>
             </li>
 
-
             <!-- Nav Item - Tags -->
             <li class="nav-item {{ Request::is('admin/dashboard/tag') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('tag.index') }}">
@@ -86,15 +96,6 @@
                     <span>Tags</span>
                 </a>
             </li>
-
-            <!-- Nav Item - Posts -->
-            <li class="nav-item {{ Request::is('admin/dashboard/post') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('post.index') }}">
-                    <i class="fas fa-solid fa-pen-square"></i>
-                    <span>Posts</span>
-                </a>
-            </li>
-
 
             <!-- Nav Item - Comments  -->
             <li class="nav-item">
@@ -104,7 +105,31 @@
                 </a>
             </li>
 
+            <!-- Nav Item - Settings -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="true" aria-controls="collapseNine">
+                    <i class="fas fa-fw fa-cogs"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            @endif
 
+            @if(Request::is('author*'))
+            <!-- Nav Item - Posts -->
+            <li class="nav-item {{ Request::is('author/dashboard/post') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('author.post.index') }}">
+                    <i class="fas fa-solid fa-pen-square"></i>
+                    <span>Posts</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - Comments  -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('comments') }}">
+                    <i class="fas fa-solid fa-comments"></i>
+                    <span>Comments</span>
+                </a>
+            </li>
 
             <!-- Nav Item - Settings -->
             <li class="nav-item">
@@ -114,6 +139,7 @@
                 </a>
             </li>
 
+            @endif
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -309,7 +335,12 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                </form>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -322,7 +353,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container">
 
                     <!-- Page Heading -->
                     @yield('content')
@@ -367,30 +398,6 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <button type="submit" class="btn btn-primary">Logout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('/assets/vendor/jquery/jquery.min.js' ) }}"></script>
     <script src="{{ asset('/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' ) }}"></script>
@@ -411,8 +418,6 @@
         @if(Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
         @endif
-
-
 
         $('.custom-file-input').on('change', function() {
             let fileName = $(this).val().split('\\').pop();

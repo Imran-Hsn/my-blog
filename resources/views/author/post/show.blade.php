@@ -10,8 +10,8 @@
 
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ route('post.index') }}">Post</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('author.dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('author.post.index') }}">Post</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Show Post</li>
                 </ol>
             </nav>

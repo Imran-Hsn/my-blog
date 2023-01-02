@@ -2,6 +2,8 @@
 
 @section('tags')
 
+
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -34,39 +36,41 @@
                     </div>
 
                     <!--Tags List -->
-                    <table class="table table-hover">
-                        <thead>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Created_at</th>
-                            <th>Updated_at</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            @foreach($items as $tag)
-                            <tr>
-                                <td>{{ $tag->id }}</td>
-                                <td>{{ $tag->name }}</td>
-                                <td>{{ $tag->created_at }}</td>
-                                <td>{{ $tag->updated_at }}</td>
-                                <td class="d-flex">
-                                    <a href="{{ route('tag.edit', [$tag->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
-                                    <form action="{{ route('tag.destroy', [$tag->id]) }}" method="post" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
-                                    </form>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Created_at</th>
+                                <th>Updated_at</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                                @foreach($items as $tag)
+                                <tr>
+                                    <td>{{ $tag->id }}</td>
+                                    <td>{{ $tag->name }}</td>
+                                    <td>{{ $tag->created_at }}</td>
+                                    <td>{{ $tag->updated_at }}</td>
+                                    <td class="d-flex">
+                                        <a href="{{ route('tag.edit', [$tag->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-edit"></i></a>
+                                        <form action="{{ route('tag.destroy', [$tag->id]) }}" method="post" onclick="return confirm('Are You Sure To Delete?')" class="mr-1">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fas fa-trash"></i></button>
+                                        </form>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="container-fluid mt-2">
-{{ $items->links() }}
+    {{ $items->links() }}
 </div>
 
 @endsection()
