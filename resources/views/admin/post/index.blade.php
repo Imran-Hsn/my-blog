@@ -64,7 +64,7 @@
                                         <span class="badge badge-info">{{ $tag->name }}</span>
                                         @endforeach
                                     </td>
-                                    <td>{{ $post->user->name }}</td>
+                                    <td>{{ $post->user->name ?? 'name' }}</td>
                                     <td>{{ $post->created_at->format('d/m/Y') }}</td>
                                     <td class="d-flex">
                                         <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fa fas fa-eye"></i></a>

@@ -66,16 +66,25 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        return view('author.post.show', ['post' => $post]);
+        if (Auth::id() == $post->user_id) {
+            return view('author.post.show', ['post' => $post]);
+        } else {
+            return redirect()->route('author.post.index');
+        }
     }
 
     // Edit Post
     public function edit($id)
-    {
-        $post = Post::find($id);
-        $categories = Category::all();
-        $tags = Tag::all();
-        return view('author.post.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
+    {$post = Post::find($id);
+        if (Auth::id() == $post->user_id) {
+
+
+            $categories = Category::all();
+            $tags = Tag::all();
+            return view('author.post.edit', ['post' => $post, 'categories' => $categories, 'tags' => $tags]);
+        } else {
+            return redirect()->route('author.post.index');
+        }
     }
 
         //Update Post

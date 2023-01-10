@@ -61,7 +61,7 @@
                                 </tr>
                                 <tr>
                                     <th>Author</th>
-                                    <td>{{ $post->user->name }}</td>
+                                    <td>{{ $post->user->name ?? 'Unknown' }}</td>
                                 </tr>
                                 <tr>
                                     <th>Create Date</th>
