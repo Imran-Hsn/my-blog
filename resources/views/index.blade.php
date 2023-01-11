@@ -10,7 +10,7 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{{ asset('assets/front/css/styles.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/front/HomePage/css/styles.css') }}" rel="stylesheet" />
 </head>
 
 <body>
@@ -26,16 +26,19 @@
                     <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
 
                     <!-- Login Register and Logout button -->
-
                     @if (Auth::guest())
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                     @else
+                    <!--Show Admin Dashboard Option to Admin -->
                     @if(Auth()->user()->role->id == 1)
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+
+                    <!--Show Author Dashboard Option to Author -->
                     @elseif(Auth()->user()->role->id == 2)
                     <li class="nav-item"><a class="nav-link" href="{{ route('author.dashboard') }}">Dashboard</a></li>
                     @endif
+
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-secondary rounded pill" type="submit">Logout</button>
@@ -47,7 +50,7 @@
     </nav>
 
     <!-- Page header with logo and tagline-->
-    <header class="py-5 bg-light border-bottom mb-4">
+    <header class="py-5  bg-light border-bottom mb-4">
         <div class="container">
             <div class="text-center my-5">
                 <h1 class="fw-bolder">Welcome to MY Blog!</h1>
@@ -58,79 +61,47 @@
     <!-- Page content-->
     <div class="container">
         <div class="row">
-            <!-- Blog entries-->
             <div class="col-lg-8">
-                <!-- Featured blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2022</div>
-                        <h2 class="card-title">Featured Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
-                    </div>
-                </div>
-                <!-- Nested row for non-featured blog posts-->
                 <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2022</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2022</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2022</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2022</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
+                    <!-- Blog entries-->
+                    <!-- Featured blog post-->
+                    <div class="card mb-4">
+                        <a href="#!"><img class="card-img-top img-fluid" style="max-height:350px;" src="/storage/post/Laravel.jpg" alt="image" /></a>
+                        <div class="card-body">
+                            <div class="small text-muted">{{ $featuredPost->created_at }} <span>by</span> Author</div>
+                            <h2 class="card-title">{{ $featuredPost->title }} </h2>
+                            <p class="card-text">{{ Str::limit($featuredPost->description, 50) }} </p>
+                            <a class="btn btn-success" href="{{ route('home.readPost', ['slug'=> $featuredPost->slug]) }} ">Read more →</a>
                         </div>
                     </div>
                 </div>
-                <!-- Pagination-->
-                <nav aria-label="Pagination">
-                    <hr class="my-0" />
-                    <ul class="pagination justify-content-center my-4">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                    </ul>
-                </nav>
+                <!-- Blogs posts -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            @foreach($latestPosts as $key=>$post)
+                            @if ($featuredPost->id == $post->id)
+                            @continue
+                            @endif
+                            <div class="col-lg-6">
+                                <!-- Blog post-->
+                                <div class="card mb-4">
+                                    <a href="#!"><img class="card-img-top img-fluid" style="max-height:200px;" src="{{ $post->image }}" alt="image" /></a>
+                                    <div class="card-body">
+                                        <div class="small text-muted">{{ $post->created_at }}</div>
+                                        <h2 class="card-title h4">{{ $post->title }}</h2>
+                                        <p class="card-text">{{ Str::limit($post->description, 50) }}</p>
+                                        <a class="btn btn-success" href="{{ route('home.readPost', ['slug'=> $post->slug]) }} ">Read more →</a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Nested row for non-featured blog posts -->
+            <!-- Pagination-->
             <!-- Side widgets-->
             <div class="col-lg-4">
                 <!-- Search widget-->
@@ -139,7 +110,7 @@
                     <div class="card-body">
                         <div class="input-group">
                             <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            <button class="btn btn-success" id="button-search" type="button">Go!</button>
                         </div>
                     </div>
                 </div>
@@ -148,20 +119,13 @@
                     <div class="card-header">Categories</div>
                     <div class="card-body">
                         <div class="row">
+                            @foreach ($categories as $category)
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
+                                    <li><a href="#!">{{ $category->name }}</a></li>
                                 </ul>
                             </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -172,7 +136,12 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            {!! $latestPosts->links('vendor.pagination.bootstrap-5') !!}
+        </div>
     </div>
+
+
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
@@ -182,6 +151,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="{{ asset('assets/front/js/scripts.js') }}""></script>
-    </body>
+    <script src="{{ asset('assets/front/HomePage/js/scripts.js') }}"></script>
+</body>
+
 </html>

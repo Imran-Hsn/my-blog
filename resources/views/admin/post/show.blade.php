@@ -66,6 +66,10 @@
                                 <tr>
                                     <th>Create Date</th>
                                     <td>{{ $post->created_at }}</td>
+                                </tr>   
+                                 <tr>
+                                    <th>Update Date</th>
+                                    <td>{{ $post->updated_at }}</td>
                                 </tr>
                                 <tr>
                                     <th>Description</th>

@@ -68,6 +68,10 @@
                                     <td>{{ $post->created_at }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Update Date</th>
+                                    <td>{{ $post->updated_at }}</td>
+                                </tr>
+                                <tr>
                                     <th>Description</th>
                                     <td class="text-break text-justify">{{ $post->description }}</td>
                                 </tr>

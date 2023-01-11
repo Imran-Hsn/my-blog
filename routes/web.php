@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Author\DashboardController as AuthorDashBoardController;
 use App\Http\Controllers\Author\PostController as AuthorPostController;
+use App\Http\Controllers\HomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,9 @@ use App\Http\Controllers\Author\PostController as AuthorPostController;
 |
 */
 
-Route::view('/', 'index')->name('home');
+Route::get('/', [HomePageController::class, 'index'])->name('home');
+// Route::get('/post/{id}', [HomePageController::class, 'readPost'])->name('home.readPost');
+Route::get('/post/{slug}', [HomePageController::class, 'readPost'])->name('home.readPost');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
