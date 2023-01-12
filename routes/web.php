@@ -23,7 +23,6 @@ use App\Http\Controllers\HomePageController;
 */
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
-// Route::get('/post/{id}', [HomePageController::class, 'readPost'])->name('home.readPost');
 Route::get('/post/{slug}', [HomePageController::class, 'readPost'])->name('home.readPost');
 
 Route::middleware('auth')->group(function () {

@@ -17,7 +17,7 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#!">MY BLOG</a>
+            <a class="navbar-brand" href="{{ route('home') }} ">MY BLOG</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -50,28 +50,28 @@
     </nav>
 
     <!-- Page header with logo and tagline-->
-    <header class="py-5  bg-light border-bottom mb-4">
-        <div class="container">
-            <div class="text-center my-5">
-                <h1 class="fw-bolder">Welcome to MY Blog!</h1>
-                <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+    <header class="bg-light border-bottom mb-4">
+        <div class="container-fluid img-fluid" style="background-image: url('assets/front/HomePage/img/blog-image.jpg'); height: 350px;">
+            <div class="text-center text-white">
+                <h1 class="fw-bolder p-5">Welcome to MY Blog!</h1>
+                <p class="lead mb-0">A Blog where you can explore interesting things all day</p>
             </div>
         </div>
     </header>
     <!-- Page content-->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
                     <!-- Blog entries-->
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top img-fluid" style="max-height:350px;" src="/storage/post/Laravel.jpg" alt="image" /></a>
+                        <a href="{{ route('home.readPost', ['slug'=> $featuredPost->slug]) }}"><img class="card-img-top img-fluid" style="max-height:350px;" src="/storage/post/Laravel.jpg" alt="image" /></a>
                         <div class="card-body">
-                            <div class="small text-muted">{{ $featuredPost->created_at }} <span>by</span> Author</div>
-                            <h2 class="card-title">{{ $featuredPost->title }} </h2>
+                            <div class="small text-muted">{{ $featuredPost->created_at->format('M d, Y') }} <span>by</span> {{ $featuredPost->user->name }} </div>
+                            <h3 class="card-title text-uppercase"><a href="{{ route('home.readPost', ['slug'=> $featuredPost->slug]) }}"> {{ $featuredPost->title }} </a></h3>
                             <p class="card-text">{{ Str::limit($featuredPost->description, 50) }} </p>
-                            <a class="btn btn-success" href="{{ route('home.readPost', ['slug'=> $featuredPost->slug]) }} ">Read more →</a>
+                            <a class="btn btn-success" href="{{ route('home.readPost', ['slug'=> $featuredPost->slug]) }}">Read more →</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                                 <div class="card mb-4">
                                     <a href="#!"><img class="card-img-top img-fluid" style="max-height:200px;" src="{{ $post->image }}" alt="image" /></a>
                                     <div class="card-body">
-                                        <div class="small text-muted">{{ $post->created_at }}</div>
+                                        <div class="small text-muted">{{ $post->created_at->format('M y, Y') }} <span class="text-dark">by</span> {{ $featuredPost->user->name }}</div>
                                         <h2 class="card-title h4">{{ $post->title }}</h2>
                                         <p class="card-text">{{ Str::limit($post->description, 50) }}</p>
                                         <a class="btn btn-success" href="{{ route('home.readPost', ['slug'=> $post->slug]) }} ">Read more →</a>
@@ -145,7 +145,7 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
+            <p class="m-0 text-center text-white">Copyright &copy; MY BLOG 2022</p>
         </div>
     </footer>
     <!-- Bootstrap core JS-->
